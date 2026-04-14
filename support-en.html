@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ARMenu — Support Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #ffffff; --surface: #f7f9fc; --border: #e2e8f0;
+      --accent: #2563eb; --accent-light: #eff6ff;
+      --text-primary: #0f172a; --text-secondary: #475569; --text-muted: #94a3b8;
+      --font: 'Inter', system-ui, sans-serif;
+    }
+    body { font-family: var(--font); background: var(--bg); color: var(--text-primary); line-height: 1.7; font-size: 16px; }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 2rem; }
+    .nav-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.1rem; color: var(--text-primary); text-decoration: none; }
+    .logo-mark { width: 32px; height: 32px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; font-weight: 700; }
+    .lang-switch { display: flex; gap: 8px; }
+    .lang-switch a { font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; padding: 5px 12px; border: 1px solid var(--border); border-radius: 6px; transition: all 0.2s; }
+    .lang-switch a:hover, .lang-switch a.active { color: var(--accent); border-color: var(--accent); background: var(--accent-light); }
+    .hero { background: var(--surface); border-bottom: 1px solid var(--border); padding: 64px 2rem 48px; text-align: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-light); color: var(--accent); font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 100px; border: 1px solid rgba(37,99,235,0.2); margin-bottom: 20px; letter-spacing: 0.5px; text-transform: uppercase; }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .hero h1 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 700; color: var(--text-primary); letter-spacing: -0.03em; margin-bottom: 12px; }
+    .hero p { color: var(--text-secondary); font-size: 1rem; max-width: 480px; margin: 0 auto; }
+
+    /* CONTACT SECTION */
+    .contact-section { max-width: 960px; margin: 0 auto; padding: 64px 2rem; }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-bottom: 64px; }
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 28px;
+      transition: box-shadow 0.2s, transform 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .contact-card:hover { box-shadow: 0 8px 32px rgba(37,99,235,0.1); transform: translateY(-2px); border-color: rgba(37,99,235,0.25); }
+    .card-icon { width: 48px; height: 48px; background: var(--accent-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
+    .contact-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+    .contact-card p { font-size: 14px; color: var(--text-secondary); margin-bottom: 16px; }
+    .card-link { font-size: 14px; font-weight: 600; color: var(--accent); display: flex; align-items: center; gap: 4px; }
+    .card-link::after { content: '→'; }
+
+    /* FAQ */
+    .faq-title { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; letter-spacing: -0.02em; }
+    .faq-subtitle { color: var(--text-secondary); font-size: 15px; margin-bottom: 32px; }
+    .faq-list { display: flex; flex-direction: column; gap: 2px; }
+    .faq-item { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .faq-q {
+      width: 100%; text-align: left;
+      background: white; border: none; cursor: pointer;
+      padding: 20px 24px;
+      font-size: 15px; font-weight: 600; color: var(--text-primary);
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; transition: background 0.2s;
+      font-family: var(--font);
+    }
+    .faq-q:hover { background: var(--surface); }
+    .faq-q .chevron { color: var(--accent); font-size: 18px; transition: transform 0.3s; flex-shrink: 0; }
+    .faq-q.open .chevron { transform: rotate(180deg); }
+    .faq-a { display: none; padding: 0 24px 20px; font-size: 14px; color: var(--text-secondary); line-height: 1.7; border-top: 1px solid var(--border); }
+    .faq-a.open { display: block; }
+    .faq-a a { color: var(--accent); }
+
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 32px 2rem; text-align: center; color: var(--text-muted); font-size: 13px; }
+    footer strong { color: var(--text-secondary); }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">AR</div>
+      ARMenu
+    </a>
+    <div class="lang-switch">
+      <a href="support-tr.html">TR</a>
+      <a href="support-en.html" class="active">EN</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Support Center</div>
+  <h1>How Can We Help You?</h1>
+  <p>Can't find your answer below? Reach out to us directly — we’ll get back to you shortly.</p>
+</div>
+
+<div class="contact-section">
+
+  <!-- Contact Cards -->
+  <div class="contact-grid">
+    <a href="mailto:ilimdarmafis@gmail.com?subject=ARMenu Support Request" class="contact-card">
+      <div class="card-icon">📧</div>
+      <h3>Email Support</h3>
+      <p>Contact us for technical issues, account access, or payment inquiries.</p>
+      <div class="card-link">ilimdarmafis@gmail.com</div>
+    </a>
+    <a href="mailto:ilimdarmafis@gmail.com?subject=ARMenu Account Deletion Request" class="contact-card">
+      <div class="card-icon">🗑️</div>
+      <h3>Account Deletion</h3>
+      <p>Request permanent deletion of your data. Processed within 30 days under GDPR/KVKK laws.</p>
+      <div class="card-link">Create Request</div>
+    </a>
+    <a href="mailto:ilimdarmafis@gmail.com?subject=ARMenu Privacy Inquiry" class="contact-card">
+      <div class="card-icon">🔒</div>
+      <h3>Privacy Inquiries</h3>
+      <p>Reach out to our privacy team for questions about how your data is handled.</p>
+      <div class="card-link">Get in Touch</div>
+    </a>
+  </div>
+
+  <!-- FAQ -->
+  <h2 class="faq-title">Frequently Asked Questions</h2>
+  <p class="faq-subtitle">Quick answers to our most common topics.</p>
+
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        Which iPhone models are required for 3D scanning? <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">
+        ARMenu’s Object Capture (photogrammetry) feature requires an iPhone 12 or newer model and iOS 17.0+. A LiDAR sensor is not strictly necessary, but iPhone 12 Pro (and newer Pro models) will yield higher quality results due to LiDAR.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        How do I cancel my subscription? <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">
+        You can cancel your subscription on your iPhone by going to <strong>Settings → Apple ID → Subscriptions → ARMenu</strong>. Cancellation takes effect at the end of the current billing cycle; refunds are not issued for remaining days.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        Will my models be lost if I delete the app? <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">
+        <strong>Plan 1 / Plan 2:</strong> Models are stored solely on your device. Deleting the app will delete the models. We recommend exporting them (as OBJ or USDZ) beforehand.<br><br>
+        <strong>Plan 3:</strong> Models are stored continuously in the Cloudflare R2 cloud. As long as your subscription is active, you can reinstall the app, sign in, and have full access to your models.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        What happens to my data if I cancel my Plan 3 subscription? <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">
+        The following process applies after cancellation:
+        <ul style="margin: 8px 0 0 16px; color: inherit;">
+          <li><strong>Immediately:</strong> A 7-day grace period begins. A warning banner is displayed.</li>
+          <li><strong>Day 7:</strong> QR links and AR embed codes are deactivated. Models become locked within the app.</li>
+          <li><strong>Day 30:</strong> All model files in R2 are permanently deleted.</li>
+        </ul>
+        If you renew your subscription within 7 days, your data remains fully intact.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        What happens when a customer scans the QR code? <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">
+        When a QR code generated for Plan 3 is scanned, the AR viewing experience launches directly in your customer's browser. It uses AR Quick Look for iOS Safari or web-based 3D viewing (model-viewer) for other platforms. Your customers do not need to download any app.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        How can I improve model quality? <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">
+        For the best results:
+        <ul style="margin: 8px 0 0 16px; color: inherit;">
+          <li>Process against a flat, plain background (a white tablecloth is ideal).</li>
+          <li>Ensure the object is well-lit; side lighting yields the best outcomes.</li>
+          <li>Complete the 3-stage scanning procedure (middle, low angle, high angle) to achieve 5-star quality.</li>
+          <li>Move slowly and steadily while scanning; sudden movements cause motion blur.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        I made a payment but my plan didn't update. What should I do? <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">
+        Force-close and reopen the app; the subscription should automatically synchronize when the session refreshes. If the issue persists, please email <a href="mailto:ilimdarmafis@gmail.com">ilimdarmafis@gmail.com</a> along with your Apple payment receipt.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        I want to delete my data. How do I do this? <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">
+        Send an email to <a href="mailto:ilimdarmafis@gmail.com?subject=Account Deletion Request">ilimdarmafis@gmail.com</a> with the subject "Account Deletion Request." We will permanently delete all data registered to your Apple ID within 30 business days and send a confirmation. This action cannot be undone.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <strong>ARMenu</strong> — iOS AR 3D Menu Platform
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="privacy-en.html">Privacy Policy (EN)</a>
+    <a href="terms-en.html">Terms of Service (EN)</a>
+    <a href="support-en.html">Support (EN)</a>
+    <a href="privacy-tr.html">Gizlilik (TR)</a>
+    <a href="terms-tr.html">Koşullar (TR)</a>
+  </div>
+  <p style="margin-top: 16px;">© 2026 ARMenu. All rights reserved.</p>
+</footer>
+
+<script>
+  function toggle(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.classList.contains('open');
+    document.querySelectorAll('.faq-a.open').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-q.open').forEach(q => q.classList.remove('open'));
+    if (!isOpen) { answer.classList.add('open'); btn.classList.add('open'); }
+  }
+</script>
+</body>
+</html>

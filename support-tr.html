@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ARMenu — Destek Merkezi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #ffffff; --surface: #f7f9fc; --border: #e2e8f0;
+      --accent: #2563eb; --accent-light: #eff6ff;
+      --text-primary: #0f172a; --text-secondary: #475569; --text-muted: #94a3b8;
+      --font: 'Inter', system-ui, sans-serif;
+    }
+    body { font-family: var(--font); background: var(--bg); color: var(--text-primary); line-height: 1.7; font-size: 16px; }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 2rem; }
+    .nav-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.1rem; color: var(--text-primary); text-decoration: none; }
+    .logo-mark { width: 32px; height: 32px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; font-weight: 700; }
+    .lang-switch { display: flex; gap: 8px; }
+    .lang-switch a { font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; padding: 5px 12px; border: 1px solid var(--border); border-radius: 6px; transition: all 0.2s; }
+    .lang-switch a:hover, .lang-switch a.active { color: var(--accent); border-color: var(--accent); background: var(--accent-light); }
+    .hero { background: var(--surface); border-bottom: 1px solid var(--border); padding: 64px 2rem 48px; text-align: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-light); color: var(--accent); font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 100px; border: 1px solid rgba(37,99,235,0.2); margin-bottom: 20px; letter-spacing: 0.5px; text-transform: uppercase; }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .hero h1 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 700; color: var(--text-primary); letter-spacing: -0.03em; margin-bottom: 12px; }
+    .hero p { color: var(--text-secondary); font-size: 1rem; max-width: 480px; margin: 0 auto; }
+
+    /* CONTACT SECTION */
+    .contact-section { max-width: 960px; margin: 0 auto; padding: 64px 2rem; }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-bottom: 64px; }
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 28px;
+      transition: box-shadow 0.2s, transform 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .contact-card:hover { box-shadow: 0 8px 32px rgba(37,99,235,0.1); transform: translateY(-2px); border-color: rgba(37,99,235,0.25); }
+    .card-icon { width: 48px; height: 48px; background: var(--accent-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
+    .contact-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+    .contact-card p { font-size: 14px; color: var(--text-secondary); margin-bottom: 16px; }
+    .card-link { font-size: 14px; font-weight: 600; color: var(--accent); display: flex; align-items: center; gap: 4px; }
+    .card-link::after { content: '→'; }
+
+    /* FAQ */
+    .faq-title { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; letter-spacing: -0.02em; }
+    .faq-subtitle { color: var(--text-secondary); font-size: 15px; margin-bottom: 32px; }
+    .faq-list { display: flex; flex-direction: column; gap: 2px; }
+    .faq-item { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .faq-q {
+      width: 100%; text-align: left;
+      background: white; border: none; cursor: pointer;
+      padding: 20px 24px;
+      font-size: 15px; font-weight: 600; color: var(--text-primary);
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; transition: background 0.2s;
+      font-family: var(--font);
+    }
+    .faq-q:hover { background: var(--surface); }
+    .faq-q .chevron { color: var(--accent); font-size: 18px; transition: transform 0.3s; flex-shrink: 0; }
+    .faq-q.open .chevron { transform: rotate(180deg); }
+    .faq-a { display: none; padding: 0 24px 20px; font-size: 14px; color: var(--text-secondary); line-height: 1.7; border-top: 1px solid var(--border); }
+    .faq-a.open { display: block; }
+    .faq-a a { color: var(--accent); }
+
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 32px 2rem; text-align: center; color: var(--text-muted); font-size: 13px; }
+    footer strong { color: var(--text-secondary); }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">AR</div>
+      ARMenu
+    </a>
+    <div class="lang-switch">
+      <a href="support-tr.html" class="active">TR</a>
+      <a href="support-en.html">EN</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Destek Merkezi</div>
+  <h1>Size Nasıl Yardımcı Olabiliriz?</h1>
+  <p>Sorunuzu bulamadıysanız doğrudan bize yazın — en kısa sürede yanıtlarız.</p>
+</div>
+
+<div class="contact-section">
+
+  <!-- Contact Cards -->
+  <div class="contact-grid">
+    <a href="mailto:ilimdarmafis@gmail.com?subject=ARMenu Destek Talebi" class="contact-card">
+      <div class="card-icon">📧</div>
+      <h3>E-posta Desteği</h3>
+      <p>Teknik sorunlar, hesap erişimi veya ödeme konularında bize yazın.</p>
+      <div class="card-link">ilimdarmafis@gmail.com</div>
+    </a>
+    <a href="mailto:ilimdarmafis@gmail.com?subject=ARMenu Hesap Silme Talebi" class="contact-card">
+      <div class="card-icon">🗑️</div>
+      <h3>Hesap Silme</h3>
+      <p>Verilerinizin kalıcı olarak silinmesini talep edebilirsiniz. KVKK kapsamında 30 gün içinde işleme alınır.</p>
+      <div class="card-link">Talep Oluştur</div>
+    </a>
+    <a href="mailto:ilimdarmafis@gmail.com?subject=ARMenu Gizlilik Sorusu" class="contact-card">
+      <div class="card-icon">🔒</div>
+      <h3>Gizlilik Soruları</h3>
+      <p>Verilerinizin nasıl işlendiğine dair sorularınız için gizlilik ekibimize yazın.</p>
+      <div class="card-link">İletişime Geç</div>
+    </a>
+  </div>
+
+  <!-- FAQ -->
+  <h2 class="faq-title">Sık Sorulan Sorular</h2>
+  <p class="faq-subtitle">En çok sorulan konular için hızlı yanıtlar.</p>
+
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        3D tarama için hangi iPhone modeli gerekiyor? <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">
+        ARMenu'nun Object Capture (fotogrametri) özelliği için iPhone 12 veya daha yeni bir model ve iOS 17.0+ gerekmektedir. LiDAR sensörü zorunlu değildir, ancak iPhone 12 Pro ve üzeri modellerde LiDAR sayesinde daha yüksek kalite elde edilir.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        Aboneliğimi nasıl iptal ederim? <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">
+        Aboneliğinizi iPhone'da <strong>Ayarlar → Apple Kimliği → Abonelikler → ARMenu</strong> yolunu izleyerek iptal edebilirsiniz. İptal, mevcut dönem sonunda geçerli olur; kalan günler için ücret iadesi yapılmaz.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        Uygulamayı silsem modellerim kaybolur mu? <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">
+        <strong>Plan 1 / Plan 2:</strong> Modeller yalnızca cihazınızda saklanır. Uygulamayı sildiğinizde modeller de silinir. Bunları önce dışa aktarmanızı (OBJ veya USDZ formatında) öneririz.<br><br>
+        <strong>Plan 3:</strong> Modeller Cloudflare R2 bulutunda saklanır. Uygulamayı silseniz dahi aktif aboneliğiniz süresince modeller bulutta kalır ve yeniden giriş yaparak erişebilirsiniz.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        Plan 3 aboneliğimi iptal ettim. Verilerime ne olacak? <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">
+        İptal sonrasında şu süreç işler:
+        <ul style="margin: 8px 0 0 16px; color: inherit;">
+          <li><strong>Anında:</strong> 7 günlük grace period başlar. Banner uyarısı görünür.</li>
+          <li><strong>7. gün:</strong> QR linkler ve AR embed kodları devre dışı kalır. Modeller uygulama içinde kilitlenir.</li>
+          <li><strong>30. gün:</strong> R2'deki tüm model dosyaları kalıcı olarak silinir.</li>
+        </ul>
+        7 gün içinde aboneliğinizi yenilerseniz hiçbir veriye dokunulmaz.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        QR kod müşterim tarafından taransa ne oluyor? <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">
+        Plan 3 için oluşturulan QR kod tarandığında, müşterinizin tarayıcısında doğrudan AR görüntüleme başlar. iOS Safari'de AR Quick Look kullanılır; diğer platformlarda model-viewer ile web tabanlı 3D görüntüleme açılır. Müşterinizin ayrıca bir uygulama indirmesi gerekmez.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        Model kalitesini nasıl artırabilirim? <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">
+        En iyi sonuç için:
+        <ul style="margin: 8px 0 0 16px; color: inherit;">
+          <li>Düz, sade bir arka plan kullanın (beyaz masa örtüsü ideal).</li>
+          <li>Nesneyi iyi aydınlatın; yan ışık en iyi sonucu verir.</li>
+          <li>3 aşamalı taramayı tamamlayın (orta, alt açı, üst açı) — kalite 5 yıldıza çıkar.</li>
+          <li>Tarama sırasında yavaş ve sakin hareket edin; ani dönmeler blur yaratır.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        Ödeme yaptım ama plan güncelleşmedi, ne yapmalıyım? <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">
+        Uygulamayı kapatıp yeniden açın; oturum yenilendiğinde abonelik otomatik olarak senkronize olacaktır. Sorun devam ederse <a href="mailto:ilimdarmafis@gmail.com">ilimdarmafis@gmail.com</a> adresine Apple ödeme makbuzunuzla birlikte yazın.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        Verilerimi silmek istiyorum, nasıl yaparım? <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">
+        <a href="mailto:ilimdarmafis@gmail.com?subject=Hesap Silme Talebi">ilimdarmafis@gmail.com</a> adresine "Hesap Silme Talebi" konuluyla e-posta gönderin. Apple ID'niz ile kayıtlı tüm verileri 30 iş günü içinde kalıcı olarak sileriz ve size onay bildiririz. Bu işlem geri alınamaz.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <strong>ARMenu</strong> — iOS AR 3D Menü Platformu
+  <div class="footer-links">
+    <a href="index.html">Ana Sayfa</a>
+    <a href="privacy-tr.html">Gizlilik (TR)</a>
+    <a href="terms-tr.html">Koşullar (TR)</a>
+    <a href="support-tr.html">Destek (TR)</a>
+    <a href="privacy-en.html">Privacy (EN)</a>
+    <a href="terms-en.html">Terms (EN)</a>
+    <a href="support-en.html">Support (EN)</a>
+  </div>
+  <p style="margin-top: 16px;">© 2026 ARMenu. Tüm hakları saklıdır.</p>
+</footer>
+
+<script>
+  function toggle(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.classList.contains('open');
+    document.querySelectorAll('.faq-a.open').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-q.open').forEach(q => q.classList.remove('open'));
+    if (!isOpen) { answer.classList.add('open'); btn.classList.add('open'); }
+  }
+</script>
+</body>
+</html>

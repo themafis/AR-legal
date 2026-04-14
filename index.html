@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ARMenu — Legal & Support Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #ffffff; --surface: #f7f9fc; --border: #e2e8f0;
+      --accent: #2563eb; --accent-light: #eff6ff;
+      --text-primary: #0f172a; --text-secondary: #475569; --text-muted: #94a3b8;
+      --font: 'Inter', system-ui, sans-serif;
+    }
+    body { font-family: var(--font); background: var(--surface); color: var(--text-primary); line-height: 1.7; font-size: 16px; min-height: 100vh; display: flex; flex-direction: column; }
+    
+    .nav-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: center; height: 100px; }
+    .logo { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 1.5rem; color: var(--text-primary); text-decoration: none; }
+    .logo-mark { width: 40px; height: 40px; background: var(--accent); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; font-weight: 700; }
+    
+    main { max-width: 800px; margin: 40px auto; padding: 40px; background: var(--bg); border: 1px solid var(--border); border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.03); flex-grow: 1; text-align: center; width: 100%; }
+    
+    h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 16px; }
+    p.subtitle { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 48px; max-width: 600px; margin-inline: auto; }
+    
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; text-align: left; }
+    
+    .section-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+    
+    .link-list { display: flex; flex-direction: column; gap: 12px; }
+    .link-list a { 
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px; background: var(--surface); border: 1px solid var(--border); 
+      border-radius: 12px; text-decoration: none; color: var(--text-primary);
+      font-weight: 500; transition: all 0.2s;
+    }
+    .link-list a:hover { border-color: var(--accent); background: var(--accent-light); color: var(--accent); transform: translateY(-2px); }
+    .link-list a::after { content: '→'; color: var(--text-muted); transition: color 0.2s; }
+    .link-list a:hover::after { color: var(--accent); }
+
+    footer { padding: 40px 2rem; text-align: center; color: var(--text-muted); font-size: 14px; }
+    
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: 1fr; gap: 32px; }
+      main { padding: 32px 20px; margin: 20px; width: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">AR</div>
+        ARMenu
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <h1>Legal & Support Hub</h1>
+    <p class="subtitle">Please select your preferred language to read our legal policies and access the support center.</p>
+    
+    <div class="grid">
+      <!-- TÜRKÇE -->
+      <div>
+        <div class="section-title">🇹🇷 Türkçe Belgeler</div>
+        <div class="link-list">
+          <a href="privacy-tr.html">Gizlilik Politikası (Privacy Policy)</a>
+          <a href="terms-tr.html">Kullanım Koşulları (Terms of Service)</a>
+          <a href="support-tr.html">Destek Merkezi (Support & FAQ)</a>
+        </div>
+      </div>
+      
+      <!-- İNGİLİZCE -->
+      <div>
+        <div class="section-title">🇬🇧 English Documents</div>
+        <div class="link-list">
+          <a href="privacy-en.html">Privacy Policy</a>
+          <a href="terms-en.html">Terms of Service</a>
+          <a href="support-en.html">Support Center & FAQ</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2026 ARMenu. All rights reserved. <br>
+    Contact: <a href="mailto:ilimdarmafis@gmail.com" style="color: var(--accent); text-decoration: none;">ilimdarmafis@gmail.com</a>
+  </footer>
+
+</body>
+</html>

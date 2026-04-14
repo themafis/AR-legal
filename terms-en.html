@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ARMenu — Terms of Service</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #ffffff; --surface: #f7f9fc; --border: #e2e8f0;
+      --accent: #2563eb; --accent-light: #eff6ff;
+      --text-primary: #0f172a; --text-secondary: #475569; --text-muted: #94a3b8;
+      --font: 'Inter', system-ui, sans-serif;
+    }
+    body { font-family: var(--font); background: var(--bg); color: var(--text-primary); line-height: 1.7; font-size: 16px; }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 2rem; }
+    .nav-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.1rem; color: var(--text-primary); text-decoration: none; }
+    .logo-mark { width: 32px; height: 32px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; font-weight: 700; }
+    .lang-switch { display: flex; gap: 8px; }
+    .lang-switch a { font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; padding: 5px 12px; border: 1px solid var(--border); border-radius: 6px; transition: all 0.2s; }
+    .lang-switch a:hover, .lang-switch a.active { color: var(--accent); border-color: var(--accent); background: var(--accent-light); }
+    .hero { background: var(--surface); border-bottom: 1px solid var(--border); padding: 64px 2rem 48px; text-align: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-light); color: var(--accent); font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 100px; border: 1px solid rgba(37,99,235,0.2); margin-bottom: 20px; letter-spacing: 0.5px; text-transform: uppercase; }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .hero h1 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 700; color: var(--text-primary); letter-spacing: -0.03em; margin-bottom: 12px; }
+    .hero p { color: var(--text-secondary); font-size: 1rem; max-width: 480px; margin: 0 auto; }
+    .hero-meta { margin-top: 24px; display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
+    .hero-meta span { color: var(--text-muted); font-size: 13px; display: flex; align-items: center; gap: 6px; }
+    .hero-meta span::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); }
+    main { max-width: 900px; margin: 0 auto; padding: 60px 2rem 80px; display: grid; grid-template-columns: 220px 1fr; gap: 48px; align-items: start; }
+    .toc { position: sticky; top: 84px; }
+    .toc-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 12px; }
+    .toc a { display: block; font-size: 13px; color: var(--text-secondary); text-decoration: none; padding: 6px 0; border-left: 2px solid var(--border); padding-left: 12px; transition: all 0.2s; }
+    .toc a:hover { color: var(--accent); border-color: var(--accent); }
+    article section { margin-bottom: 56px; scroll-margin-top: 90px; }
+    article h2 { font-size: 1.35rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+    article h2 .section-num { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--accent); color: white; border-radius: 7px; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+    article h3 { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin: 24px 0 8px; }
+    article p { color: var(--text-secondary); margin-bottom: 12px; font-size: 15px; }
+    article ul { padding-left: 0; margin-bottom: 12px; }
+    article ul li { color: var(--text-secondary); font-size: 15px; padding: 5px 0 5px 20px; position: relative; }
+    article ul li::before { content: ''; position: absolute; left: 0; top: 14px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    article a { color: var(--accent); text-decoration: none; }
+    article a:hover { text-decoration: underline; }
+    .info-box { background: var(--accent-light); border: 1px solid rgba(37,99,235,0.15); border-left: 3px solid var(--accent); border-radius: 8px; padding: 16px 20px; margin: 20px 0; font-size: 14px; color: var(--text-secondary); }
+    .info-box strong { color: var(--accent); }
+    .warning-box { background: #fff7ed; border: 1px solid rgba(234,88,12,0.2); border-left: 3px solid #ea580c; border-radius: 8px; padding: 16px 20px; margin: 20px 0; font-size: 14px; color: #7c2d12; }
+    .plan-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+    .plan-table th { background: var(--accent); color: white; padding: 10px 14px; text-align: left; font-weight: 600; }
+    .plan-table th:first-child { border-radius: 8px 0 0 0; }
+    .plan-table th:last-child { border-radius: 0 8px 0 0; }
+    .plan-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+    .plan-table tr:hover td { background: var(--surface); }
+    .contact-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-top: 16px; }
+    .contact-card p { margin: 0; font-size: 14px; }
+    .contact-card a { color: var(--accent); font-weight: 500; }
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 32px 2rem; text-align: center; color: var(--text-muted); font-size: 13px; }
+    footer strong { color: var(--text-secondary); }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+    @media (max-width: 768px) { main { grid-template-columns: 1fr; } .toc { display: none; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">AR</div>
+      ARMenu
+    </a>
+    <div class="lang-switch">
+      <a href="terms-tr.html">TR</a>
+      <a href="terms-en.html" class="active">EN</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Legal Document</div>
+  <h1>Terms of Service</h1>
+  <p>Please read these terms carefully before using the ARMenu service.</p>
+  <div class="hero-meta">
+    <span>Last updated: April 2026</span>
+    <span>Version 1.0</span>
+    <span>English</span>
+  </div>
+</div>
+
+<main>
+  <aside>
+    <nav class="toc">
+      <div class="toc-title">Contents</div>
+      <a href="#s1">1. Acceptance</a>
+      <a href="#s2">2. Service Description</a>
+      <a href="#s3">3. Account & Identity</a>
+      <a href="#s4">4. Subscription Plans</a>
+      <a href="#s5">5. Payment Terms</a>
+      <a href="#s6">6. Cancellation & Deletion</a>
+      <a href="#s7">7. Acceptable Use</a>
+      <a href="#s8">8. Intellectual Property</a>
+      <a href="#s9">9. Limitation of Liability</a>
+      <a href="#s10">10. Changes to Service</a>
+      <a href="#s11">11. Governing Law</a>
+      <a href="#s12">12. Contact</a>
+    </nav>
+  </aside>
+
+  <article>
+
+    <section id="s1">
+      <h2><span class="section-num">1</span> Acceptance of Terms</h2>
+      <p>By downloading, registering, or using the ARMenu iOS application (the "App"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these terms, please do not use the application.</p>
+      <p>These terms form a binding agreement between you (the "User") and ARMenu. We may update these terms from time to time; material changes will be announced via in-app notifications.</p>
+    </section>
+
+    <section id="s2">
+      <h2><span class="section-num">2</span> Service Description</h2>
+      <p>ARMenu is an iOS SaaS platform enabling businesses to digitize their products into 3D/AR format using the iPhone camera. Core features include:</p>
+      <ul>
+        <li>Photogrammetry-based 3D modeling using the iPhone camera (Object Capture)</li>
+        <li>On-device storage of created models (all plans)</li>
+        <li>Exporting 3D models in USDZ and OBJ formats (Plans 1, 2, and 3)</li>
+        <li>Cloud uploading models to Cloudflare R2 (Plan 3 only)</li>
+        <li>QR code and AR embed code generation (Plan 3 only)</li>
+        <li>Web embed codes for AR viewing on external websites (Plan 3 only)</li>
+      </ul>
+      <div class="info-box">
+        <strong>Technical Requirement:</strong> The Object Capture feature requires an iPhone 12 or newer running iOS 17.0+. Devices that do not meet these requirements cannot run the AR scanning feature.
+      </div>
+    </section>
+
+    <section id="s3">
+      <h2><span class="section-num">3</span> Account & Identity</h2>
+      <p>ARMenu uses <strong>Sign in with Apple</strong> exclusively for authentication. Third-party identity providers are not supported.</p>
+      <ul>
+        <li>Only one ARMenu account can be created per Apple ID.</li>
+        <li>You are solely responsible for maintaining the confidentiality of your account information.</li>
+        <li>In case of suspected unauthorized access, please <a href="mailto:ilimdarmafis@gmail.com">notify us</a> immediately.</li>
+        <li>The app can be used in a guest (anonymous) mode; however, features requiring an account will be restricted.</li>
+      </ul>
+    </section>
+
+    <section id="s4">
+      <h2><span class="section-num">4</span> Subscription Plans</h2>
+      <p>ARMenu offers four tiers of service:</p>
+      <table class="plan-table">
+        <thead>
+          <tr>
+            <th>Plan</th>
+            <th>Monthly Scans</th>
+            <th>Cloud Storage</th>
+            <th>QR / AR Embed</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Free</td><td>2 (lifetime)</td><td>—</td><td>—</td><td>₺0</td></tr>
+          <tr><td>Plan 1</td><td>15/month</td><td>—</td><td>—</td><td>₺179/month</td></tr>
+          <tr><td>Plan 2</td><td>Unlimited</td><td>—</td><td>—</td><td>₺459/month</td></tr>
+          <tr><td>Plan 3</td><td>Unlimited</td><td>✓ (1,000 models)</td><td>✓</td><td>₺769/month</td></tr>
+        </tbody>
+      </table>
+      <p>Prices shown are Apple App Store local prices and are subject to change. Plan features may be updated without prior notice.</p>
+    </section>
+
+    <section id="s5">
+      <h2><span class="section-num">5</span> Payment Terms</h2>
+      <ul>
+        <li>All payments are processed through the Apple App Store (using StoreKit 2).</li>
+        <li>Subscriptions renew automatically on a monthly basis; charges apply 24 hours prior to the renewal date.</li>
+        <li>Apple retains a 30% commission on subscription transactions.</li>
+        <li>Prices may exclude VAT (Value Added Tax); all tax liabilities are managed by the Apple App Store.</li>
+        <li>Payment and refund policies are subject to Apple's <a href="https://www.apple.com/legal/internet-services/itunes/" target="_blank">Terms of Service</a>.</li>
+      </ul>
+    </section>
+
+    <section id="s6">
+      <h2><span class="section-num">6</span> Cancellation & Data Deletion</h2>
+
+      <h3>Canceling Your Subscription</h3>
+      <p>You can cancel your subscription via iPhone Settings > Apple ID > Subscriptions, or via the in-app link. Cancellation takes effect at the end of the current billing cycle. Access rights after cancellation apply as follows:</p>
+
+      <ul>
+        <li><strong>Immediately:</strong> Your account enters a "grace period".</li>
+        <li><strong>Day 7:</strong> QR links, AR embed codes, and cloud access are revoked. In-app models become locked.</li>
+        <li><strong>Day 30:</strong> All model files stored in Cloudflare R2 are permanently deleted.</li>
+      </ul>
+
+      <div class="warning-box">
+        ⚠️ <strong>Warning:</strong> Cloud models deleted after the 30-day period cannot be recovered. We recommend using the in-app export feature to back up your models.
+      </div>
+
+      <h3>Plan 1 / Plan 2 Cancellation</h3>
+      <p>Because models in these plans are stored only on your device, they remain on your device after cancellation. You will not be able to perform new scans.</p>
+    </section>
+
+    <section id="s7">
+      <h2><span class="section-num">7</span> Acceptable Use Rules</h2>
+      <p>By using the ARMenu service, you agree to abide by the following rules:</p>
+
+      <h3>You May:</h3>
+      <ul>
+        <li>Scan objects that you own or have permission to use.</li>
+        <li>Use the created 3D models for commercial purposes.</li>
+        <li>Share models with customers and partners.</li>
+      </ul>
+
+      <h3>You May Not:</h3>
+      <ul>
+        <li>Scan intellectual property (trademarked, copyrighted items) belonging to others without permission.</li>
+        <li>Use the app to create unlawful, immoral, or harmful content.</li>
+        <li>Reverse engineer, extract source code, or copy the application.</li>
+        <li>Attempt unauthorized access to APIs or bypass quota limitations.</li>
+        <li>Transfer or lease your account to others.</li>
+      </ul>
+      <p>Violations of these rules may result in the suspension or termination of your account without prior notice.</p>
+    </section>
+
+    <section id="s8">
+      <h2><span class="section-num">8</span> Intellectual Property</h2>
+
+      <h3>User Content</h3>
+      <p>The 3D models you create belong to you. ARMenu claims no ownership over your models. However, for Plan 3 cloud storage, you grant us permission to store your models on our servers and perform necessary technical operations to provide access.</p>
+
+      <h3>ARMenu Property</h3>
+      <p>The ARMenu application, logo, design system, source code, and all service components are the intellectual property of ARMenu. These materials may not be copied, distributed, or used to create derivative works without written permission.</p>
+    </section>
+
+    <section id="s9">
+      <h2><span class="section-num">9</span> Limitation of Liability</h2>
+      <p>ARMenu is not liable for direct or indirect damages resulting from service interruptions, data loss, or third-party service issues. These exemptions include, but are not limited to:</p>
+      <ul>
+        <li>Outages originating from Apple StoreKit, Supabase, or Cloudflare infrastructure.</li>
+        <li>Cloud access issues due to internet connection problems.</li>
+        <li>Local model loss due to device malfunctions or insufficient storage.</li>
+        <li>Quality issues of models generated by the Object Capture API.</li>
+      </ul>
+      <p>The service is provided "as is". No guarantees are made regarding fitness for a particular purpose or continuous availability.</p>
+    </section>
+
+    <section id="s10">
+      <h2><span class="section-num">10</span> Changes to the Service</h2>
+      <p>ARMenu reserves the right to modify its features, pricing, and these terms with prior notice. Price changes will not affect the current subscription period; they apply to the next renewal cycle.</p>
+      <p>The service may be partially or entirely terminated due to technical, commercial, or legal requirements. In such cases, users will be notified at least 30 days in advance, and refunds will be provided for the remaining prepaid period.</p>
+    </section>
+
+    <section id="s11">
+      <h2><span class="section-num">11</span> Governing Law</h2>
+      <p>These Terms shall be governed by the laws of the Republic of Turkey. Any disputes arising between the parties are subject to the jurisdiction of Turkish courts.</p>
+      <p>Disputes relating to purchases made through the Apple App Store may also be subject to Apple's App Store terms of service.</p>
+    </section>
+
+    <section id="s12">
+      <h2><span class="section-num">12</span> Contact</h2>
+      <p>For questions or requests regarding these Terms of Service:</p>
+      <div class="contact-card">
+        <p>📧 Email: <a href="mailto:ilimdarmafis@gmail.com">ilimdarmafis@gmail.com</a></p>
+        <p style="margin-top: 8px;">Response time: 3–5 business days</p>
+      </div>
+    </section>
+
+  </article>
+</main>
+
+<footer>
+  <strong>ARMenu</strong> — iOS AR 3D Menu Platform
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="privacy-en.html">Privacy Policy (EN)</a>
+    <a href="terms-en.html">Terms of Service (EN)</a>
+    <a href="support-en.html">Support (EN)</a>
+    <a href="privacy-tr.html">Gizlilik (TR)</a>
+    <a href="terms-tr.html">Koşullar (TR)</a>
+  </div>
+  <p style="margin-top: 16px;">© 2026 ARMenu. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

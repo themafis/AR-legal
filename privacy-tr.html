@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ARMenu — Gizlilik Politikası</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --surface: #f7f9fc;
+      --border: #e2e8f0;
+      --accent: #2563eb;
+      --accent-light: #eff6ff;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --font: 'Inter', system-ui, sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 900px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 700; font-size: 1.1rem; color: var(--text-primary);
+      text-decoration: none;
+    }
+    .logo-mark {
+      width: 32px; height: 32px;
+      background: var(--accent);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 14px; font-weight: 700;
+    }
+    .lang-switch {
+      display: flex; gap: 8px;
+    }
+    .lang-switch a {
+      font-size: 13px; font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 5px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .lang-switch a:hover, .lang-switch a.active {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 64px 2rem 48px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 12px; font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+      border: 1px solid rgba(37,99,235,0.2);
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      max-width: 480px; margin: 0 auto;
+    }
+    .hero-meta {
+      margin-top: 24px;
+      display: flex; justify-content: center; gap: 32px;
+      flex-wrap: wrap;
+    }
+    .hero-meta span {
+      color: var(--text-muted); font-size: 13px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .hero-meta span::before {
+      content: '';
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* CONTENT */
+    main {
+      max-width: 900px; margin: 0 auto;
+      padding: 60px 2rem 80px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* SIDEBAR TOC */
+    .toc {
+      position: sticky; top: 84px;
+    }
+    .toc-title {
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .toc a {
+      display: block;
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 6px 0;
+      border-left: 2px solid var(--border);
+      padding-left: 12px;
+      transition: all 0.2s;
+    }
+    .toc a:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ARTICLE */
+    article section {
+      margin-bottom: 56px;
+      scroll-margin-top: 90px;
+    }
+    article h2 {
+      font-size: 1.35rem; font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--border);
+      display: flex; align-items: center; gap: 10px;
+    }
+    article h2 .section-num {
+      display: flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px;
+      background: var(--accent); color: white;
+      border-radius: 7px; font-size: 13px; font-weight: 700;
+      flex-shrink: 0;
+    }
+    article h3 {
+      font-size: 1rem; font-weight: 600;
+      color: var(--text-primary);
+      margin: 24px 0 8px;
+    }
+    article p {
+      color: var(--text-secondary);
+      margin-bottom: 12px; font-size: 15px;
+    }
+    article ul {
+      padding-left: 0; margin-bottom: 12px;
+    }
+    article ul li {
+      color: var(--text-secondary); font-size: 15px;
+      padding: 5px 0 5px 20px;
+      position: relative;
+    }
+    article ul li::before {
+      content: '';
+      position: absolute; left: 0; top: 14px;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    article a { color: var(--accent); text-decoration: none; }
+    article a:hover { text-decoration: underline; }
+
+    /* INFO BOX */
+    .info-box {
+      background: var(--accent-light);
+      border: 1px solid rgba(37,99,235,0.15);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .info-box strong { color: var(--accent); }
+
+    /* CONTACT CARD */
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 16px;
+    }
+    .contact-card p { margin: 0; font-size: 14px; }
+    .contact-card a { color: var(--accent); font-weight: 500; }
+
+    /* FOOTER */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 32px 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+    footer strong { color: var(--text-secondary); }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      main { grid-template-columns: 1fr; }
+      .toc { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">AR</div>
+      ARMenu
+    </a>
+    <div class="lang-switch">
+      <a href="privacy-tr.html" class="active">TR</a>
+      <a href="privacy-en.html">EN</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Yasal Belge</div>
+  <h1>Gizlilik Politikası</h1>
+  <p>ARMenu uygulamasında kişisel verilerinizin nasıl işlendiğini açıklar.</p>
+  <div class="hero-meta">
+    <span>Son güncelleme: Nisan 2026</span>
+    <span>Versiyon 1.0</span>
+    <span>Türkçe</span>
+  </div>
+</div>
+
+<main>
+  <aside>
+    <nav class="toc">
+      <div class="toc-title">İçindekiler</div>
+      <a href="#s1">1. Genel Bakış</a>
+      <a href="#s2">2. Topladığımız Veriler</a>
+      <a href="#s3">3. Veriler Nasıl Kullanılır</a>
+      <a href="#s4">4. Verilerin Saklanması</a>
+      <a href="#s5">5. Üçüncü Taraf Hizmetler</a>
+      <a href="#s6">6. Abonelik ve Ödeme</a>
+      <a href="#s7">7. 3D Model Verileriniz</a>
+      <a href="#s8">8. Veri Silme</a>
+      <a href="#s9">9. Çocukların Gizliliği</a>
+      <a href="#s10">10. Haklarınız</a>
+      <a href="#s11">11. İletişim</a>
+    </nav>
+  </aside>
+
+  <article>
+
+    <section id="s1">
+      <h2><span class="section-num">1</span> Genel Bakış</h2>
+      <p>ARMenu ("biz", "uygulama"), iPhone kamerasıyla gerçek dünya nesnelerini tarayarak 3D/AR modeller oluşturmanızı ve bu modelleri işletmenizde kullanmanızı sağlayan bir iOS SaaS platformudur.</p>
+      <p>Bu Gizlilik Politikası, uygulamayı kullandığınızda hangi kişisel verilerin toplandığını, bu verilerin nasıl işlendiğini ve haklarınızın neler olduğunu açıklamaktadır. Uygulamayı kullanarak bu politikayı kabul etmiş sayılırsınız.</p>
+      <div class="info-box">
+        <strong>Önemli:</strong> ARMenu, yalnızca hizmetin işleyişi için zorunlu olan minimum düzeyde kişisel veri toplar. Kişisel verilerinizi üçüncü taraflara satmaz ve pazarlama amacıyla paylaşmayız.
+      </div>
+    </section>
+
+    <section id="s2">
+      <h2><span class="section-num">2</span> Topladığımız Veriler</h2>
+
+      <h3>a) Apple ile Giriş Yap (Sign in with Apple)</h3>
+      <p>Uygulamaya giriş yapmanız için Sign in with Apple kullanılmaktadır. Bu süreçte şu veriler işlenir:</p>
+      <ul>
+        <li>Apple tarafından atanan benzersiz kullanıcı kimliği (Apple ID hash)</li>
+        <li>E-posta adresi (yalnızca Apple'dan iletilmişse ve gizleme tercih edilmemişse)</li>
+        <li>Daha önce sisteme girmiş olmanız durumunda, kullanıcı adı</li>
+      </ul>
+      <p>Apple ID'nin ham hâli asla loglanmaz; yalnızca şifrelenmiş biçimiyle saklanır.</p>
+
+      <h3>b) Kullanım Verileri</h3>
+      <ul>
+        <li>Tarama sayısı (aylık veya toplam kota takibi için)</li>
+        <li>Seçilen sektör (kafe, restoran, perakende vb.)</li>
+        <li>Abonelik planı ve durumu</li>
+        <li>Son görülme tarihi (oturum yönetimi için)</li>
+      </ul>
+
+      <h3>c) 3D Model Verileri (yalnızca Plan 3)</h3>
+      <ul>
+        <li>Tarama sonucu oluşturulan USDZ formatındaki 3D model dosyaları</li>
+        <li>Model adı, kategori ve oluşturulma tarihi</li>
+        <li>Eklediğiniz etiket (call-out) bilgileri</li>
+        <li>Modelin cloud depolama yolu</li>
+      </ul>
+      <p>Plan 1 ve Plan 2 kullanıcılarının modelleri yalnızca cihazınızda (yerel olarak) saklanır; sunucularımıza yüklenmez.</p>
+
+      <h3>d) Otomatik Toplanan Veriler</h3>
+      <ul>
+        <li>Cihaz modeli ve iOS sürümü (kamera/AR uyumluluğu tespiti için)</li>
+        <li>Uygulama versiyon numarası</li>
+        <li>Crash raporları (sadece hata ayıklama amaçlı; kimlik içermez)</li>
+      </ul>
+    </section>
+
+    <section id="s3">
+      <h2><span class="section-num">3</span> Veriler Nasıl Kullanılır</h2>
+      <p>Topladığımız veriler yalnızca aşağıdaki amaçlarla kullanılır:</p>
+      <ul>
+        <li>Hesabınızı oluşturmak ve doğrulamak</li>
+        <li>Abonelik planınızı yönetmek ve tarama kotanızı takip etmek</li>
+        <li>Plan 3 için bulut yedekleme ve QR/AR erişim servisi sağlamak</li>
+        <li>Abonelik iptali veya ödeme sorunlarında sizi bilgilendirmek</li>
+        <li>Uygulama hatalarını düzeltmek ve güvenliği sağlamak</li>
+        <li>Apple App Store gerekliliklerini yerine getirmek</li>
+      </ul>
+    </section>
+
+    <section id="s4">
+      <h2><span class="section-num">4</span> Verilerin Saklanması</h2>
+      <p>ARMenu, altyapısı için aşağıdaki servisleri kullanmaktadır:</p>
+      <ul>
+        <li><strong>Supabase (PostgreSQL):</strong> Kullanıcı hesabı ve abonelik bilgileri. Sunucular AB veri merkezlerinde barındırılmaktadır.</li>
+        <li><strong>Cloudflare R2 (yalnızca Plan 3):</strong> 3D model dosyalarının bulut depolanması. Küresel CDN üzerinden dağıtılır.</li>
+        <li><strong>Apple StoreKit 2:</strong> Abonelik ve ödeme işleme. Ödeme bilgileri ARMenu sunucularına ulaşmaz; yalnızca Apple tarafından işlenir.</li>
+      </ul>
+      <p>Hesabınız aktif olduğu sürece verileriniz saklanmaya devam eder. Aboneliğinizi iptal etmeniz durumunda veri silme süreci aşağıdaki politikaya göre işler.</p>
+    </section>
+
+    <section id="s5">
+      <h2><span class="section-num">5</span> Üçüncü Taraf Hizmetler</h2>
+      <p>ARMenu aşağıdaki üçüncü taraf hizmetleri kullanır:</p>
+      <ul>
+        <li><strong>Apple (Sign in with Apple, StoreKit):</strong> Kimlik doğrulama ve ödeme. Apple'ın gizlilik politikası: <a href="https://www.apple.com/tr/legal/privacy/" target="_blank">apple.com/tr/legal/privacy</a></li>
+        <li><strong>Supabase:</strong> Veritabanı ve kimlik doğrulama altyapısı. <a href="https://supabase.com/privacy" target="_blank">supabase.com/privacy</a></li>
+        <li><strong>Cloudflare:</strong> İçerik dağıtım ağı ve bulut depolama. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank">cloudflare.com/privacypolicy</a></li>
+      </ul>
+      <p>Bu servisler kendi gizlilik politikalarına tabidir. ARMenu, söz konusu servislerin veri işleme uygulamalarından sorumlu tutulamaz.</p>
+    </section>
+
+    <section id="s6">
+      <h2><span class="section-num">6</span> Abonelik ve Ödeme</h2>
+      <p>Tüm ödeme işlemleri Apple App Store altyapısı (StoreKit 2) üzerinden gerçekleştirilir. Kredi kartı numarası, banka hesabı veya ödemeye ilişkin finansal bilgileriniz ARMenu sunucularında işlenmez ve saklanmaz.</p>
+      <p>Abonelik yönetimi (iptal, plan değişikliği) iPhone Ayarlar > Apple Kimliği > Abonelikler bölümünden yapılır.</p>
+    </section>
+
+    <section id="s7">
+      <h2><span class="section-num">7</span> 3D Model Verileriniz</h2>
+      <p>Oluşturduğunuz 3D modeller size aittir.</p>
+      <ul>
+        <li><strong>Plan 1 / Plan 2:</strong> Modeller yalnızca cihazınızda yerel olarak saklanır. Sunucularımıza yüklenmez. Uygulamayı sildiğinizde modeller de silinir.</li>
+        <li><strong>Plan 3:</strong> Modeller Cloudflare R2'ye yüklenerek QR ve AR embed kodu aracılığıyla erişilebilir hale getirilir. Aboneliğiniz iptal edildiğinde <a href="#s8">Veri Silme</a> politikası uygulanır.</li>
+      </ul>
+    </section>
+
+    <section id="s8">
+      <h2><span class="section-num">8</span> Veri Silme Politikası</h2>
+
+      <h3>Abonelik iptali sonrası (Plan 3):</h3>
+      <ul>
+        <li><strong>Anında:</strong> Hesabınız grace period (geçiş süresi) aşamasına girer.</li>
+        <li><strong>7. gün:</strong> QR linkleri ve AR embed kodları devre dışı bırakılır. Uygulama içi modeller kilitlenir.</li>
+        <li><strong>30. gün:</strong> Cloudflare R2'deki tüm model dosyalarınız ve ilgili meta veriler kalıcı olarak silinir.</li>
+      </ul>
+      <div class="info-box">
+        <strong>İpucu:</strong> 7 gün içinde aboneliğinizi yenilerseniz hiçbir veriye dokunulmaz. 30 güne kadar aboneliğinizi yenilerseniz bulut verileriniz korunmaya devam eder.
+      </div>
+
+      <h3>Hesap silme talebi:</h3>
+      <p>Hesabınızın ve tüm verilerinizin kalıcı olarak silinmesini talep etmek için <a href="mailto:ilimdarmafis@gmail.com">ilimdarmafis@gmail.com</a> adresine e-posta gönderin. Talebiniz 30 iş günü içinde işleme alınır.</p>
+    </section>
+
+    <section id="s9">
+      <h2><span class="section-num">9</span> Çocukların Gizliliği</h2>
+      <p>ARMenu, 13 yaş altı (veya yaşadığınız ülkedeki yasal asgari yaşın altındaki) kişilere yönelik değildir. Bu yaşın altındaki bireylerden bilerek kişisel veri toplamayız. Yanlışlıkla bu tür bir veri toplandığını fark etmemiz veya bildirilmesi durumunda söz konusu veriyi derhal sileriz.</p>
+      <p>Uygulama App Store yaş puanlaması: <strong>4+ (kısıtlı içerik bulunmamaktadır)</strong></p>
+    </section>
+
+    <section id="s10">
+      <h2><span class="section-num">10</span> Haklarınız</h2>
+      <p>Aşağıdaki haklara sahipsiniz:</p>
+      <ul>
+        <li><strong>Erişim hakkı:</strong> Hangi kişisel verilerinizin tutulduğunu öğrenme</li>
+        <li><strong>Düzeltme hakkı:</strong> Yanlış verilerin düzeltilmesini talep etme</li>
+        <li><strong>Silme hakkı (unutulma):</strong> Tüm verilerinizin silinmesini talep etme</li>
+        <li><strong>Taşınabilirlik hakkı:</strong> Verilerinizin yapılandırılmış biçimde tarafınıza iletilmesini isteme</li>
+        <li><strong>İtiraz hakkı:</strong> Veri işleme faaliyetlerine itiraz etme</li>
+      </ul>
+      <p>Haklarınızı kullanmak için aşağıdaki iletişim kanalını kullanabilirsiniz.</p>
+    </section>
+
+    <section id="s11">
+      <h2><span class="section-num">11</span> İletişim</h2>
+      <p>Gizlilik politikasına ilişkin sorularınız veya talepleriniz için:</p>
+      <div class="contact-card">
+        <p>📧 E-posta: <a href="mailto:ilimdarmafis@gmail.com">ilimdarmafis@gmail.com</a></p>
+        <p style="margin-top:8px;">Yanıt süresi: İş günleri içinde 3-5 gün</p>
+      </div>
+      <p style="margin-top: 20px;">Bu politika zaman zaman güncellenebilir. Önemli değişiklikler uygulama içi bildirimle duyurulur. Güncel politikaya her zaman bu sayfadan ulaşabilirsiniz.</p>
+    </section>
+
+  </article>
+</main>
+
+<footer>
+  <strong>ARMenu</strong> — iOS AR 3D Menü Platformu
+  <div class="footer-links">
+    <a href="index.html">Ana Sayfa</a>
+    <a href="privacy-tr.html">Gizlilik Politikası (TR)</a>
+    <a href="terms-tr.html">Kullanım Koşulları (TR)</a>
+    <a href="support-tr.html">Destek (TR)</a>
+    <a href="privacy-en.html">Privacy (EN)</a>
+    <a href="terms-en.html">Terms (EN)</a>
+  </div>
+  <p style="margin-top: 16px;">© 2026 ARMenu. Tüm hakları saklıdır.</p>
+</footer>
+
+</body>
+</html>
