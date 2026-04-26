@@ -119,11 +119,11 @@
       <h3>Sign in with Apple Authentication</h3>
       <p>We use Sign in with Apple for authentication. During this process, the following data is processed:</p>
       <ul>
-        <li>Unique user identifier assigned by Apple (hashed Apple ID — never changes)</li>
+        <li>Sign in with Apple account identifier and the internal AR Support ID assigned to your account</li>
         <li>Email address (only if provided by Apple and not hidden by the user)</li>
         <li>Display name (if previously set)</li>
       </ul>
-      <p>The raw Apple ID is never stored in logs; only its hashed form is kept.</p>
+      <p>Your raw Apple ID and Apple account password are never stored by AR. The AR Support ID is a Supabase user UUID used to identify your account for support, subscription sync, and account deletion.</p>
 
       <h3>Usage Data</h3>
       <ul>
@@ -213,8 +213,8 @@
         <strong>Tip:</strong> If you renew your subscription within 7 days, none of your data will be touched. If you renew within 30 days, your cloud data will still be protected.
       </div>
 
-      <h3>Account deletion request:</h3>
-      <p>To request permanent deletion of your account and all associated data, send an email to <a href="mailto:ilimdarmafis@gmail.com">ilimdarmafis@gmail.com</a>. Your request will be processed within 30 business days.</p>
+      <h3>Account deletion:</h3>
+      <p>You can initiate permanent account deletion directly in the app from <strong>Settings → Delete Account Permanently</strong>. After confirmation, AR deletes your Supabase authentication account, profile data, model metadata, and Cloudflare R2 model files. If you have an active App Store subscription, billing must be managed separately in Apple subscription settings.</p>
     </section>
 
     <section id="s9">

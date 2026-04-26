@@ -310,11 +310,11 @@
       <h3>Apple ile Giriş Yap (Sign in with Apple)</h3>
       <p>Uygulamaya giriş yapmanız için Sign in with Apple kullanılmaktadır. Bu süreçte şu veriler işlenir:</p>
       <ul>
-        <li>Apple tarafından atanan benzersiz kullanıcı kimliği (Apple ID hash)</li>
+        <li>Sign in with Apple hesap tanımlayıcısı ve hesabınıza atanan dahili AR Destek Kodu</li>
         <li>E-posta adresi (yalnızca Apple'dan iletilmişse ve gizleme tercih edilmemişse)</li>
         <li>Daha önce sisteme girmiş olmanız durumunda, kullanıcı adı</li>
       </ul>
-      <p>Apple ID'nin ham hâli asla loglanmaz; yalnızca şifrelenmiş biçimiyle saklanır.</p>
+      <p>Ham Apple ID'niz ve Apple hesabı parolanız AR tarafından asla saklanmaz. AR Destek Kodu, destek, abonelik senkronizasyonu ve hesap silme işlemlerinde hesabınızı tanımlamak için kullanılan Supabase kullanıcı UUID'sidir.</p>
 
       <h3>Kullanım Verileri</h3>
       <ul>
@@ -404,8 +404,8 @@
         <strong>İpucu:</strong> 7 gün içinde aboneliğinizi yenilerseniz hiçbir veriye dokunulmaz. 30 güne kadar aboneliğinizi yenilerseniz bulut verileriniz korunmaya devam eder.
       </div>
 
-      <h3>Hesap silme talebi:</h3>
-      <p>Hesabınızın ve tüm verilern kalıcı olarak silinmesini talep etmek için <a href="mailto:ilimdarmafis@gmail.com">ilimdarmafis@gmail.com</a> adresine e-posta gönderin. Talebiniz 30 iş günü içinde işleme alınır.</p>
+      <h3>Hesap silme:</h3>
+      <p>Hesabınızın kalıcı olarak silinmesini doğrudan uygulama içinden <strong>Ayarlar → Hesabı Kalıcı Olarak Sil</strong> adımından başlatabilirsiniz. Onaydan sonra AR; Supabase kimlik doğrulama hesabınızı, profil verilerinizi, model meta verilerinizi ve Cloudflare R2 model dosyalarınızı siler. Aktif App Store aboneliğiniz varsa ödeme iptali ayrıca Apple abonelik ayarlarından yönetilmelidir.</p>
     </section>
 
     <section id="s9">
